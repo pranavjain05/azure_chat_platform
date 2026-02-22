@@ -5,7 +5,7 @@
 This project implements a production-grade real-time chat system on Azure with an incremental ETL pipeline orchestrated using Apache Airflow and Infrastructure-as-Code using Terraform.
 
 ## Architecture
-				![Architecture](docs/architecture.png)
+![Architecture](docs/architecture.png)
 ## Features
 
 * Real-time chat using Azure Web PubSub
