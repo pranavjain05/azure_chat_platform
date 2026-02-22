@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+
+# Environment
+.env
+
+# Airflow
+airflow.db
+logs/
+
+# Terraform
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/

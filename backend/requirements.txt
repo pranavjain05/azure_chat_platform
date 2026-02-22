@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+azure-cosmos
+python-dotenv
+gunicorn
+azure-messaging-webpubsubservice
+websockets

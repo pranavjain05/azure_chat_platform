@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Azure Chat</title>
+</head>
+<body>
+
+<h2>Azure Realtime Chat</h2>
+
+<label>Your Username:</label>
+<input id="username" /><br><br>
+
+<label>Chat With:</label>
+<input id="receiver" /><br><br>
+
+<button onclick="connect()">Connect</button>
+
+<hr>
+
+<div id="chat" style="height:300px;border:1px solid black;overflow:auto;"></div>
+
+<br>
+
+<input id="message" placeholder="Type message" />
+<button onclick="sendMessage()">Send</button>
+
+<script>
+
+let ws = null;
+
+async function connect() {
+
+    const username = document.getElementById("username").value;
+
+    const response = await fetch(`/get_websocket_url?userId=${username}`);
+    const data = await response.json();
+
+    ws = new WebSocket(data.url);
+
+    ws.onmessage = function(event) {
+
+        const msg = JSON.parse(event.data);
+
+        const chat = document.getElementById("chat");
+
+        chat.innerHTML += `<div><b>${msg.data.senderId}:</b> ${msg.data.message}</div>`;
+
+    };
+}
+
+async function sendMessage() {
+
+    const sender = document.getElementById("username").value;
+    const receiver = document.getElementById("receiver").value;
+    const message = document.getElementById("message").value;
+
+    await fetch("/send_message", {
+
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+
+        body: JSON.stringify({
+
+            senderId: sender,
+            receiverId: receiver,
+            message: message
+
+        })
+    });
+
+}
+
+</script>
+
+</body>
+</html>
